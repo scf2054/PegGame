@@ -1,0 +1,14 @@
+general
+if pegExists(Location) and row >  0 and row < max_row
+and col > 0 and col < max_col 
+
+
+verticle
+makeNewMove(location) {
+    
+}
+
+
+horezontal
+
+Diagnol
