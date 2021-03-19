@@ -1,14 +1,41 @@
-general
-if pegExists(Location) and row >  0 and row < max_row
-and col > 0 and col < max_col 
+helpers:
 
-
-verticle
-makeNewMove(location) {
-    
+pegExists(Location) {
+    return a boolean if a peg already exists on the loaction parameter
+    This will allow the peg to make the move there
 }
 
+locationExists(Location) {
+    returns a boolean if location's (row > 0 AND row < max_row) OR (col > 0 AND col < max_col)
+}
 
-horezontal
+makeNewMove(Location) {
 
-Diagnol
+    checks if pegExists and if locationExists
+
+    String moveMade
+
+    verticle
+    from is equal to the current location of the peg
+    to is equal to the current location's row + 2 or - 2
+    moveMade is equal to "Verticle"
+
+    horizontal
+    from is equal to the current location of the peg
+    to is equal to the current location's col + 2 or - 2
+    moveMde is equal to "Horizontal"
+
+    Diagonal
+    from is equal to the current location of the peg
+    to is equal to the current location's col + 2 and row + 2
+    or col + 2 and row - 2
+    or col - 2 and row + 2
+    or col - 2 and row - 2
+    moveMade is equal to "Diagonal"
+
+    return the peg in the middle
+    row-1 or row+1 if moveMade verticle
+    col-1 or col+1 if moveMade is Horizontal
+    both if moveMade is diagonal
+
+}
