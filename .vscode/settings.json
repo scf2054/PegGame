@@ -1,6 +1,7 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Users\\borna\\VS Code\\JUnit\\junit-platform-console-standalone-1.7.0-all.jar"
+        "c:\\Users\\borna\\VS Code\\JUnit\\junit-platform-console-standalone-1.7.0-all.jar",
+        "c:\\Users\\earth\\Documents\\junit-platform-console-standalone-1.7.0-all.jar"
     ]
 }
