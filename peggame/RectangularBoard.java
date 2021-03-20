@@ -111,11 +111,53 @@ public class RectangularBoard implements PegGame {
 
     @Override
     public void MakeMove(Move move) throws PegGameException {
-        Location from = move.getFrom();
-        Location to = move.getTo();
+        Set<Move> possibleMoves = (Set<Move>)getPossibleMoves();
+        if (!possibleMoves.contains(move)) {
+            throw new PegGameException("Move is not possible");
+        }
+        else {
+            Location from = move.getFrom();
+            Location to = move.getTo(); 
+            movesMade.add(move);
+            // original location remove peg
+            Location location = getLocation(from.getRow(), from.getCol());
+            location.setPeg(false);
 
+            // new location add peg
+            location = getLocation(to.getRow(), to.getCol());
+            location.setPeg(true);
+            // remove peg in the middle
+                // x is from.cols
+                int midCol = from.getCol();
+                // y is from.rows
+                int midRow = from.getRow();
 
-        
+                // if x + 2 is to.col 
+                if (midCol + 2 == to.getCol()) {
+                    // midCol = x + 1
+                    midCol += 1;
+                }
+                // else if x - 2 is to.col
+                else if (midCol - 2 == to.getCol()) {
+                    // midCol = x - 1
+                    midCol -= 1;
+                }
+                // if y + 2 is to.row
+                if (midRow + 2 == to.getRow()) {
+                        // midRow = y + 1
+                        midRow += 1;
+                }
+                // else if y - 2 is to.row
+                else if (midRow - 2 == to.getRow()) {
+                    // midRow = y - 1
+                    midRow -= 1;
+                }
+                
+                // get location at midRow, midCol
+                location = getLocation(midRow, midCol);
+                // set hasPeg to false
+                location.setPeg(false);
+        }       
     }
 
     /**
