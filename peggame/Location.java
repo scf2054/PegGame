@@ -20,7 +20,9 @@ public class Location {
         return this.col;
     }
 
-
+    public boolean hasPeg() {
+        return this.hasPeg;
+    }
 
     /**
      * @param o other object the user wants to compare
