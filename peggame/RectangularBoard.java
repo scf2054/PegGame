@@ -101,12 +101,30 @@ public class RectangularBoard implements PegGame {
 
     @Override
     public GameState getGameState() {
-        // The game is won is there is only 1 peg on board
-        // The game is not started if movesMade.size() = 0
-        // The game is in progress if getPossible moves is not empty
-        // The game is stalemate if getPossible moves is empty and movesMade is not empty
-        
-        return null;
+        if(movesMade.size() == 0){
+            // The game is not started if movesMade.size() = 0
+            return GameState.NOT_STARTED;
+        } else {
+            // The game is in progress if getPossible moves is not empty
+            Set<Move> possible = (Set<Move>) getPossibleMoves();
+            if(possible.size() != 0){
+                return GameState.IN_PROGRESS;
+            } else {
+                int numPegs = 0;
+                for(Location location : locations){
+                    if(location.hasPeg()){
+                        numPegs++;
+                    }
+                }
+                // The game is won is there is only 1 peg on board
+                // The game is stalemate if getPossible moves is empty and movesMade is not empty
+                if(numPegs > 1){
+                    return GameState.STALEMATE;
+                } else {
+                    return GameState.WON;
+                }
+            }
+        }
     }
 
     @Override

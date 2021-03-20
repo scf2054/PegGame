@@ -10,10 +10,11 @@ import java.util.Set;
 import org.junit.Test;
 import org.junit.platform.commons.annotation.Testable;
 
+import peggame.PegGame.GameState;
 import peggame.PegGame.PegGameException;
 
 @Testable
-public class TestRectangualrBoard {
+public class TestRectangularBoard {
     
     @Test
     public void testToStringEmpty() {
@@ -92,5 +93,19 @@ public class TestRectangualrBoard {
         catch (PegGameException e) {
             assertTrue(true);
         }
+    }
+
+    @Test
+    public void testGameStateNotStarted(){
+        PegGame board = new RectangularBoard(3, 3);
+        Location[] locations = board.getLocations();
+        locations[0].setPeg(true);
+        locations[1].setPeg(true);
+        locations[2].setPeg(true);
+        GameState expected = GameState.NOT_STARTED;
+
+        GameState actual = board.getGameState();
+
+        assertEquals(expected, actual);
     }
 }
