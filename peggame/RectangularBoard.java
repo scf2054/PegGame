@@ -63,16 +63,28 @@ public class RectangularBoard implements PegGame {
         Location location;
         for(int i = 0; i < this.locations.length; i++) {
             location = this.locations[i];
+            if(i % this.cols == 0 && i != 0) {
+                board += "\n";
+            }
+
             if(location.hasPeg()) {
                 board += "o";
             } else {
                 board += "-";
             }
-
-            if(i % this.cols == 0 && i != 0) {
-                board += "\n";
-            }
         }
         return board;
+    }
+
+    public int getRows() {
+        return this.rows;
+    }
+
+    public int getCols() {
+        return this.cols;
+    }
+
+    public Location[] getLocations() {
+        return this.locations;
     }
 }

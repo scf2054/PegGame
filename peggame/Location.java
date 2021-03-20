@@ -28,6 +28,10 @@ public class Location {
         return this.hasPeg;
     }
 
+    public void setPeg(boolean status) {
+        this.hasPeg = status;
+    }
+
     /**
      * @param o other object the user wants to compare
      * 

@@ -11,8 +11,6 @@ getPossibleMoves(Location) {
 
 MakeMove(Location) {
 
-    checks if pegExists and if locationExists
-
     String moveMade
 
     verticle
@@ -33,7 +31,6 @@ MakeMove(Location) {
     or col - 2 and row - 2
     moveMade is equal to "Diagonal"
 
-    return the peg in the middle
     row-1 or row+1 if moveMade verticle
     col-1 or col+1 if moveMade is Horizontal
     both if moveMade is diagonal
