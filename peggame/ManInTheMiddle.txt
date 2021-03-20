@@ -5,11 +5,11 @@ pegExists(Location) {
     This will allow the peg to make the move there
 }
 
-locationExists(Location) {
-    returns a boolean if location's (row > 0 AND row < max_row) OR (col > 0 AND col < max_col)
+getPossibleMoves(Location) {
+    returns a set of all the possible moves (those with a peg and those that aren't off the board)
 }
 
-makeNewMove(Location) {
+MakeMove(Location) {
 
     checks if pegExists and if locationExists
 
