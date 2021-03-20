@@ -99,6 +99,12 @@ public class RectangularBoard implements PegGame {
         return null;
     }
 
+    /**
+     * returns the state of the game depending on the amount of
+     * pegs and moves made by the user
+     * 
+     * @return GameState enum
+     */
     @Override
     public GameState getGameState() {
         if(movesMade.size() == 0){
@@ -127,6 +133,15 @@ public class RectangularBoard implements PegGame {
         }
     }
 
+    /**
+     * Makes a move depending on user input
+     * 
+     * Moves the current peg to the space the user wants it to,
+     * removes the peg right in front of the current peg
+     * 
+     * @param Move that the user wants to make
+     * @throws PegGameException if the move is invalid
+     */
     @Override
     public void MakeMove(Move move) throws PegGameException {
         Set<Move> possibleMoves = (Set<Move>)getPossibleMoves();
