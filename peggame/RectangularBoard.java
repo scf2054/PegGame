@@ -38,78 +38,58 @@ public class RectangularBoard implements PegGame {
         return locations;
     }
 
+    /**
+     * Iterates over each location in this locations, if the location has a peg then check every possible move
+     * if the move doesnt have a peg and isnt off the board, add it to the possible set
+     * 
+     * tested manually
+     * 
+     * @return set of all the possible moves from a specific location
+     */
     @Override
     public Collection<Move> getPossibleMoves() {
         Set<Move> possible = new HashSet<>();
         for(Location location : this.locations){
             if(location.hasPeg()){
+                int up2 = location.getRow()+2;
+                int up1 = location.getRow()+1;
+                int down2 = location.getRow()-2;
+                int down1 = location.getRow()-1;
+                int right2 = location.getCol()+2;
+                int right1 = location.getCol()+1;
+                int left2 = location.getCol()-2;
+                int left1 = location.getCol()-1;
+
+                int[] movesV = {up2, up1, down2, down1, location.getRow(), location.getRow(), location.getRow(), location.getRow(), up2, up1, down2, down1, up2, up1, down2, down1};
+                int[] movesH = {location.getCol(), location.getCol(), location.getCol(), location.getCol(), right2, right1, left2, left1, right2, right1, left2, left1, left2, left1, right2, right1};
                 // verticle
                 // If current location plus 2 isn't off the board
                 // If the location 1 away from where we are has a peg
                 // If the location 2 away does not have one
-                    Location moveTo = getLocation(location.getRow()+2, location.getCol());
-                    Location target = getLocation(location.getRow()+1, location.getCol());
+                for(int i = 0; i < movesV.length; i+=2) {
+                    Location moveTo = getLocation(movesV[i], movesH[i]);
+                    Location target = getLocation(movesV[i+1], movesH[i+1]);
                     if(moveTo != null && target.hasPeg() && !moveTo.hasPeg()){
                         Move moveV = new Move(location, moveTo);
                         possible.add(moveV);
                     }
                     
-                    moveTo = getLocation(location.getRow()-2, location.getCol());
-                    target = getLocation(location.getRow()-1, location.getCol());
-                    if(moveTo != null && target.hasPeg() && !moveTo.hasPeg()){
-                        Move moveV = new Move(location, moveTo);
-                        possible.add(moveV);
-                    }
-
-                // horizontal
-                    moveTo = getLocation(location.getRow(), location.getCol()+2);
-                    target = getLocation(location.getRow(), location.getCol()+1);
-                    if(moveTo != null && target.hasPeg() && !moveTo.hasPeg()){
-                        Move moveV = new Move(location, moveTo);
-                        possible.add(moveV);
-                    }
-                    
-                    moveTo = getLocation(location.getRow(), location.getCol()-2);
-                    target = getLocation(location.getRow(), location.getCol()-1);
-                    if(moveTo != null && target.hasPeg() && !moveTo.hasPeg()){
-                        Move moveV = new Move(location, moveTo);
-                        possible.add(moveV);
-                    }
-
-                // diagonal
-                    moveTo = getLocation(location.getRow()+2, location.getCol()+2);
-                    target = getLocation(location.getRow()+1, location.getCol()+1);
-                    if(moveTo != null && target.hasPeg() && !moveTo.hasPeg()){
-                        Move moveV = new Move(location, moveTo);
-                        possible.add(moveV);
-                    }
-                    
-                    moveTo = getLocation(location.getRow()-2, location.getCol()-2);
-                    target = getLocation(location.getRow()-1, location.getCol()-1);
-                    if(moveTo != null && target.hasPeg() && !moveTo.hasPeg()){
-                        Move moveV = new Move(location, moveTo);
-                        possible.add(moveV);
-                    }
-                    
-                    moveTo = getLocation(location.getRow()+2, location.getCol()-2);
-                    target = getLocation(location.getRow()+1, location.getCol()-1);
-                    if(moveTo != null && target.hasPeg() && !moveTo.hasPeg()){
-                        Move moveV = new Move(location, moveTo);
-                        possible.add(moveV);
-                    }
-                    
-                    moveTo = getLocation(location.getRow()-2, location.getCol()+2);
-                    target = getLocation(location.getRow()-1, location.getCol()+1);
-                    if(moveTo != null && target.hasPeg() && !moveTo.hasPeg()){
-                        Move moveV = new Move(location, moveTo);
-                        possible.add(moveV);
-                    }
+                }
             }
         }
-        
-        return null;
+        return possible;
     }
 
+    /**
+     * Helper method for getPossibleMoves that allows us to get the 
+     * location we want from the locations list.
+     * 
+     * return null if its off the board
+     * 
+     * @param row of location we want to get
+     * @param col of location we want to get
+     * @return location from the locations list
+     */
     private Location getLocation(int row, int col){
         for(Location location : this.locations){
             if(location.getRow() == row && location.getCol() == col){
@@ -172,5 +152,15 @@ public class RectangularBoard implements PegGame {
 
     public Location[] getLocations() {
         return this.locations;
+    }
+
+    public static void main(String[] args) {
+        PegGame board = new RectangularBoard(3, 3);
+        Location[] locations = board.getLocations();
+        locations[0].setPeg(true);
+        locations[3].setPeg(true);
+        locations[1].setPeg(true);
+
+        board.getPossibleMoves();
     }
 }
