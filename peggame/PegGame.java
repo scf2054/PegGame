@@ -11,11 +11,6 @@ public interface PegGame {
         WON;
     }
 
-    public class PegGameException extends Exception {
-        public PegGameException(String message) throws PegGameException {
-        }
-    }
-
     Collection<Move> getPossibleMoves();
     GameState getGameState();
     void MakeMove(Move move) throws PegGameException;

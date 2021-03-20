@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.platform.commons.annotation.Testable;
 
 import peggame.PegGame.GameState;
-import peggame.PegGame.PegGameException;
 
 @Testable
 public class TestRectangularBoard {
