@@ -6,6 +6,10 @@ public class Location {
     private int col;
     private boolean hasPeg;
 
+    public Location(int row, int col) {
+        this(row, col, false);
+    }
+
     public Location(int row, int col, boolean hasPeg) {
         this.row = row;
         this.col = col;
