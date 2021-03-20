@@ -11,8 +11,8 @@ public class TestLocation {
     public void testEqualsValid(){
         int row = 0;
         int col = 0;
-        Location location1 = new Location(row, col);
-        Location location2 = new Location(row, col);
+        Location location1 = new Location(row, col,false);
+        Location location2 = new Location(row, col,false);
         boolean expected = true;
 
         boolean actual = location1.equals(location2);
@@ -24,8 +24,8 @@ public class TestLocation {
     public void testEqualsInvalid(){
         int row = 0;
         int col = 0;
-        Location location1 = new Location(row, col);
-        Location location2 = new Location(row, col+1);
+        Location location1 = new Location(row, col, false);
+        Location location2 = new Location(row, col+1, false);
         boolean expected = false;
 
         boolean actual = location1.equals(location2);

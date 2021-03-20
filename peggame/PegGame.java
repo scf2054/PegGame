@@ -12,7 +12,6 @@ public interface PegGame {
     }
 
     public class PegGameException extends Exception {
-
         public PegGameException(String message) throws PegGameException {
             throw new PegGameException("Invalid move attempted.");
         }
