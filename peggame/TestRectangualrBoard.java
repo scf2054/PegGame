@@ -75,6 +75,7 @@ public class TestRectangualrBoard {
         Location[] locations = board.getLocations();
         locations[0].setPeg(true);
         locations[1].setPeg(true);
+        locations[2].setPeg(true);
         Location fromLocation = locations[0];
         Location toLocation = locations[2];
         Move move = new Move(fromLocation, toLocation);
@@ -89,7 +90,7 @@ public class TestRectangualrBoard {
             assertEquals(expected, actual);
         }
         catch (PegGameException e) {
-            assertFalse(true);
+            assertTrue(true);
         }
     }
 }
