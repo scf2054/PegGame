@@ -4,10 +4,12 @@ public class Location {
 
     private int row;
     private int col;
+    private boolean hasPeg;
 
-    public Location(int row, int col) {
+    public Location(int row, int col, boolean hasPeg) {
         this.row = row;
         this.col = col;
+        this.hasPeg = hasPeg;
     }
 
     public int getRow() {
@@ -17,6 +19,8 @@ public class Location {
     public int getCol() {
         return this.col;
     }
+
+
 
     /**
      * @param o other object the user wants to compare
