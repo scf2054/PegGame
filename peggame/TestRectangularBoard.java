@@ -108,4 +108,66 @@ public class TestRectangularBoard {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testGameStateInProgress(){
+        PegGame board = new RectangularBoard(3, 3);
+        Location[] locations = board.getLocations();
+        locations[0].setPeg(true);
+        locations[1].setPeg(true);
+        locations[5].setPeg(true);
+        Location fromLocation = locations[0];
+        Location toLocation = locations[2];
+        Move move = new Move(fromLocation,toLocation);
+        GameState expected = GameState.IN_PROGRESS;
+
+        try{
+            board.MakeMove(move);
+            GameState actual = board.getGameState();
+            assertEquals(expected, actual);
+        } catch (PegGameException p){
+            assertFalse(true);
+        }
+    }
+
+    @Test
+    public void testGameStateWon(){
+        PegGame board = new RectangularBoard(3, 3);
+        Location[] locations = board.getLocations();
+        locations[0].setPeg(true);
+        locations[1].setPeg(true);
+        Location fromLocation = locations[0];
+        Location toLocation = locations[2];
+        Move move = new Move(fromLocation,toLocation);
+        GameState expected = GameState.WON;
+
+        try{
+            board.MakeMove(move);
+            GameState actual = board.getGameState();
+            assertEquals(expected, actual);
+        } catch (PegGameException p){
+            assertFalse(true);
+        }
+    }
+
+    @Test
+    public void testGameStateStalemate(){
+        PegGame board = new RectangularBoard(3, 3);
+        Location[] locations = board.getLocations();
+        locations[0].setPeg(true);
+        locations[1].setPeg(true);
+        locations[8].setPeg(true);
+        Location fromLocation = locations[0];
+        Location toLocation = locations[2];
+        Move move = new Move(fromLocation,toLocation);
+        GameState expected = GameState.STALEMATE;
+
+        try{
+            board.MakeMove(move);
+            GameState actual = board.getGameState();
+            assertEquals(expected, actual);
+        } catch (PegGameException p){
+            assertFalse(true);
+        }
+    }
 }
