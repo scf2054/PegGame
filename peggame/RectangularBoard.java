@@ -1,14 +1,12 @@
 package peggame;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 public class RectangularBoard implements PegGame {
 
     private final int rows;
     private final int cols;
-    private final Set<Location> locations;
+    private final Location[] locations;
 
     public RectangularBoard(int rows, int cols) {
         this.rows = rows;
@@ -17,18 +15,20 @@ public class RectangularBoard implements PegGame {
     }
 
     /**
-     * Creates the board which is a set of every single location on the board.
+     * Creates the board which is an Array of every single location on the board.
      * 
      * Only accessible within the rectangular board class.
      * 
      * @return set of locations on the board
      */
-    private Set<Location> makeLocations() {
-        Set<Location> locations = new HashSet<>();
+    private Location[] makeLocations() {
+        Location[] locations = new Location[this.rows * this.cols];
+        int index = 0;
         for(int row = 0; row < this.rows; row++) {
             for(int col = 0; col < this.cols; col++) {
                 Location location = new Location(row, col);
-                locations.add(location);
+                locations[index] = location;
+                index++;
             }
         }
         return locations;
@@ -52,6 +52,27 @@ public class RectangularBoard implements PegGame {
         
     }
 
+    /**
+     * pegs are "o" and spaces are "-"
+     * 
+     * @return string of the board
+     */
+    @Override
+    public String toString() {
+        String board = "";
+        Location location;
+        for(int i = 0; i < this.locations.length; i++) {
+            location = this.locations[i];
+            if(location.hasPeg()) {
+                board += "o";
+            } else {
+                board += "-";
+            }
 
-    
+            if(i % this.cols == 0 && i != 0) {
+                board += "\n";
+            }
+        }
+        return board;
+    }
 }
