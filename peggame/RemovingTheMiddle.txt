@@ -1,0 +1,22 @@
+Horizontal:
+    if from's col -2 is equal to to's col, or from's col +2 is equals to to's col
+        it's Horizontal
+        if from's col -2 is equal to to's col  
+            get the x-coordinate at from's col - 1
+        otherwise
+            get the x-coordinate at from's col + 1
+
+Verticle:
+    if from's row -2 is equal to to's row, or from's row +2 is equal to to's row
+        it's vertical
+        if from's row -2 is equal to to's row  
+            get the y-coordinate at from's row - 1
+        otherwise
+            get the y-coordinate at from's row + 1
+
+Diagonal: 
+    if it's both horizontal and verticle
+        it's diagonal
+
+get the location at the x and y corrdinate
+remove the peg there
