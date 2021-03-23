@@ -40,4 +40,16 @@ public class PegReaderFile {
         filereader.close();
         return peg;
     }
+
+    public static void main(String[] args) {
+        String filename = "data/10_10.txt";
+
+        try {
+            PegGame peg = PegFile(filename);
+            System.out.println(peg);
+
+        } catch (IOException e){
+            System.out.println("File doesn't exist, you turnip.");
+        }
+    }
 }
