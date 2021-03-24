@@ -11,10 +11,10 @@ public class Project1Main {
         PegGame game = null;
         try{
             game = ReadFile.PegFile(filename);
+            CommanderPeg.playPegGame(game);
         } catch (IOException e){
-            System.out.println("H");
+            System.out.println("File not found");
         }
-        CommanderPeg.playPegGame(game);
         scanner.close();
     }
 }
