@@ -10,6 +10,10 @@ import java.util.Set;
 import peggame.PegGame.GameState;
 
 public class CommanderPeg {
+
+    /**
+     * Command input interface for prompting the user to play the game
+     */
     public static void playPegGame() {
         /**
          * command line commands
@@ -47,6 +51,8 @@ public class CommanderPeg {
                 if (command.equals("y")) {
                     System.out.println("Goodbye!");
                     break;
+                } else if(command.equals("n")) {
+                    continue;
                 }
             }
             else if (commands[0].equals("help")) {

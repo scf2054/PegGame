@@ -6,6 +6,17 @@ import java.io.IOException;
 
 public class ReadFile {
     
+    /**
+     * Makes the board for the user to play the game. Reads in the file
+     * and depending on where the pegs ("o") are, the board places a peg there
+     * from the beginning. Leaves in spaces (".").
+     * 
+     * @param filename for the board the user wants to use
+     * 
+     * @return PegGame of type rectangle for the user to play
+     * 
+     * @throws IOException for the reader variables
+     */
     public static PegGame PegFile(String filename) throws IOException{
         FileReader filereader = new FileReader(filename);
         BufferedReader reader = new BufferedReader(filereader);
