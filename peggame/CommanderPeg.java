@@ -1,6 +1,5 @@
 package peggame;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -10,11 +9,10 @@ import java.util.Set;
 import peggame.PegGame.GameState;
 
 public class CommanderPeg {
-
     /**
      * Command input interface for prompting the user to play the game
      */
-    public static void playPegGame() {
+    public static void playPegGame(PegGame game) {
         /**
          * command line commands
          *      help - displays commands
@@ -27,18 +25,8 @@ public class CommanderPeg {
          *      quit
          */
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a file name: ");
-        String filename = scanner.nextLine();
-        PegGame game = null;
         Set<Move> hintsUsed = new HashSet<>();
-        try {
-            game = ReadFile.PegFile(filename);
-        }
 
-        catch(IOException e) {
-            System.out.println("\nFile not found.");
-            System.exit(0);
-        }
         Location[] locations = game.getLocations();
         while (true) {
             System.out.println("\n" + game + "\n");
@@ -137,9 +125,5 @@ public class CommanderPeg {
         }
         scanner.close();
 
-    }
-
-    public static void main(String[] args) {
-        playPegGame();
     }
 }
