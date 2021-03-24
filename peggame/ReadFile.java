@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class PegReaderFile {
+public class ReadFile {
     
     public static PegGame PegFile(String filename) throws IOException{
         FileReader filereader = new FileReader(filename);

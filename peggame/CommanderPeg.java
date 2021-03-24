@@ -21,7 +21,7 @@ public class CommanderPeg {
         String filename = scanner.nextLine();
         PegGame game = null;
         try {
-            game = PegReaderFile.PegFile(filename);
+            game = ReadFile.PegFile(filename);
         }
 
         catch(IOException e) {
