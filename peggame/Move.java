@@ -23,7 +23,7 @@ public class Move {
 
     @Override
     public String toString(){
-        return("From: "+from+"\nTo: "+to);
+        return("from "+from+" to "+to);
     }
 
     @Override

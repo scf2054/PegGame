@@ -3,7 +3,6 @@ package peggame;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
@@ -33,18 +32,20 @@ public class CommanderPeg {
         }
 
         catch(IOException e) {
-            System.out.println("file not found");
+            System.out.println("\nFile not found.");
+            System.exit(0);
         }
+        Location[] locations = game.getLocations();
         while (true) {
-            System.out.println(game);
+            System.out.println("\n" + game + "\n");
             System.out.print(">> ");
             String command = scanner.nextLine();
             String[] commands = command.split(" ");
             if (commands[0].equals("quit")) {
-                System.out.print("Are you sure(y/n): ");
+                System.out.print("Are you sure? (y/n): ");
                 command = scanner.nextLine();
                 if (command.equals("y")) {
-                    System.out.println("GoodBye!");
+                    System.out.println("Goodbye!");
                     break;
                 }
             }
@@ -57,7 +58,11 @@ public class CommanderPeg {
             }
 
             else if (commands[0].equals("hint")) {
-                ArrayList<Move> moves = (ArrayList<Move>)game.getPossibleMoves();
+                HashSet<Move> possible = (HashSet<Move>)game.getPossibleMoves();
+                ArrayList<Move> moves = new ArrayList<>();
+                for(Move possibility : possible) {
+                    moves.add(possibility);
+                }
                 Random random = new Random();
                 boolean found = false;
                 while (!found) {
@@ -65,37 +70,58 @@ public class CommanderPeg {
                     Move move = moves.get(index);
                     if (!hintsUsed.contains(move)) {
                         hintsUsed.add(move);
-                        System.out.println("Move " + move);
+                        System.out.println("hint: Move " + move);
                         found = true;
                     } 
                 }
             }
 
             else if (commands[0].equals("move")) {
-                int startRow = Integer.parseInt(commands[1]);
-                int startCol = Integer.parseInt(commands[2]);
-                int endRow = Integer.parseInt(commands[3]);
-                int endCol = Integer.parseInt(commands[4]);
-                Location startLoc = new Location(startRow, startCol);
-                Location endLoc = new Location(endRow, endCol);
-                Move move = new Move(startLoc, endLoc);
+                int startRow, startCol, endRow, endCol;
                 try {
-                    game.MakeMove(move);
-                }
+                    startRow = Integer.parseInt(commands[1]);
+                    startCol = Integer.parseInt(commands[2]);
+                    endRow = Integer.parseInt(commands[3]);
+                    endCol = Integer.parseInt(commands[4]);
+                    Location startLoc = new Location(startRow, startCol);
+                    Location endLoc = new Location(endRow, endCol);
+                    boolean foundS = false;
+                    boolean foundE = false;
+                    for(Location loc : locations) {
+                        if(loc.equals(startLoc)) {
+                            startLoc = loc;
+                            foundS = true;
+                        } else if(loc.equals(endLoc)) {
+                            endLoc = loc;
+                            foundE = true;
+                        }
+                        if(foundS && foundE) {
+                            break;
+                        }
+                    }
+                    Move move = new Move(startLoc, endLoc);
+                    try {
+                        game.MakeMove(move);
+                    }
+    
+                    catch (PegGameException e) {
+                        System.out.println("Invalid Move.");
+                    }
+                    if (game.getGameState() == GameState.WON) {
+                        System.out.println("You Win!");
+                        System.out.println(game);
+                        break;
+                    }
+    
+                    else if (game.getGameState() == GameState.STALEMATE) {
+                        System.out.println("No more moves");
+                        System.out.println(game);
+                        System.out.println("\nGoodbye!");
+                        break;
+                    }
 
-                catch (PegGameException e) {
-                    System.out.println("Invalid Move.");
-                }
-                if (game.getGameState() == GameState.WON) {
-                    System.out.println("You Won!");
-                    System.out.println(game);
-                    break;
-                }
-
-                else if (game.getGameState() == GameState.STALEMATE) {
-                    System.out.println("No more moves");
-                    System.out.println(game);
-                    break;
+                } catch(ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Invalid move.");
                 }
             }
 
@@ -103,6 +129,11 @@ public class CommanderPeg {
                 System.out.println("Invalid Input");
             }
         }
+        scanner.close();
 
+    }
+
+    public static void main(String[] args) {
+        playPegGame();
     }
 }
