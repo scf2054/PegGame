@@ -57,6 +57,10 @@ public class CommanderPeg {
                 for(Move possibility : possible) {
                     moves.add(possibility);
                 }
+                if (hintsUsed.size() == moves.size()) {
+                    System.out.println("Used all of the hints");
+                    continue;
+                }
                 Random random = new Random();
                 boolean found = false;
                 while (!found) {
@@ -90,6 +94,7 @@ public class CommanderPeg {
                             foundE = true;
                         }
                         if(foundS && foundE) {
+                            hintsUsed = new HashSet<>();
                             break;
                         }
                     }
