@@ -15,5 +15,9 @@ public interface PegGame {
     GameState getGameState();
     void MakeMove(Move move) throws PegGameException;
     Location[] getLocations();
-    
+
+    default PegGame deepCopy() {
+        throw new UnsupportedOperationException();
+    }
+
 }
