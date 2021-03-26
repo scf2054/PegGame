@@ -240,14 +240,9 @@ public class RectangularBoard implements PegGame {
             newLocations[i] = loc;
         }
 
-        Set<Move> newMoves = new HashSet<>();
-        for(Move move : this.movesMade) {
-            newMoves.add(move);
-        }
-
         copy.setLocations(newLocations);
-        copy.setMovesMade(newMoves);
-        
+        copy.setMovesMade(this.movesMade);
+
         return copy;
     }
 
