@@ -2,7 +2,7 @@ package peggame;
 
 import java.util.Collection;
 
-public interface PegGame {
+public interface PegGame{
 
     public enum GameState {
         NOT_STARTED, 
