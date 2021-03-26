@@ -166,4 +166,41 @@ public class TestRectangularBoard {
             assertFalse(true);
         }
     }
+
+    @Test
+    public void testDeepCopy() {
+        // setup
+        RectangularBoard expected = new RectangularBoard(3, 3);
+        
+        // invoke
+        RectangularBoard actual = expected.deepCopy();
+
+        // analyze
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testDeepCopyMove() {
+        // setup
+        RectangularBoard board = new RectangularBoard(3, 3);
+        RectangularBoard copy = board.deepCopy();
+        Location[] locationsOrig = board.getLocations();
+        Location[] locationsCopy = copy.getLocations();
+        locationsOrig[0].setPeg(true);
+        locationsOrig[1].setPeg(true);
+        locationsCopy[0].setPeg(true);
+        locationsCopy[1].setPeg(true);
+
+        // invoke
+        Location from = locationsCopy[0];
+        Location to = locationsCopy[2];
+        try {
+            copy.MakeMove(new Move(from, to));
+        } catch (PegGameException e) {
+            e.printStackTrace();
+        }
+
+        // analyze
+        assertFalse(board.equals(copy));
+    }
 }

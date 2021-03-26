@@ -8,8 +8,8 @@ public class RectangularBoard implements PegGame {
 
     private final int rows;
     private final int cols;
-    private final Location[] locations;
-    private final Set<Move> movesMade;
+    private Location[] locations;
+    private Set<Move> movesMade;
 
     public RectangularBoard(int rows, int cols) {
         this.rows = rows;
@@ -217,6 +217,40 @@ public class RectangularBoard implements PegGame {
         return board;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof RectangularBoard) {
+            RectangularBoard other = (RectangularBoard)obj;
+            return this.toString().equals(other.toString());
+        }
+        return false;
+    }
+
+    /**
+     * Copy every location into the new PegGame
+     * 
+     * @return a successor for the game
+     */
+    @Override
+    public RectangularBoard deepCopy() {
+        RectangularBoard copy = new RectangularBoard(this.rows, this.cols);
+        Location[] newLocations = new Location[this.locations.length];
+        for(int i = 0; i < newLocations.length; i++) {
+            Location loc = new Location(this.locations[i].getRow(), this.locations[i].getCol());
+            newLocations[i] = loc;
+        }
+
+        Set<Move> newMoves = new HashSet<>();
+        for(Move move : this.movesMade) {
+            newMoves.add(move);
+        }
+
+        copy.setLocations(newLocations);
+        copy.setMovesMade(newMoves);
+        
+        return copy;
+    }
+
     public int getRows() {
         return this.rows;
     }
@@ -229,13 +263,35 @@ public class RectangularBoard implements PegGame {
         return this.locations;
     }
 
-    public static void main(String[] args) {
-        PegGame board = new RectangularBoard(3, 3);
-        Location[] locations = board.getLocations();
-        locations[0].setPeg(true);
-        locations[3].setPeg(true);
-        locations[1].setPeg(true);
+    public void setLocations(Location[] newLocations) {
+        this.locations = newLocations;
+    }
 
-        board.getPossibleMoves();
+    public void setMovesMade(Set<Move> newMoves) {
+        this.movesMade = newMoves;
+    }
+
+    public static void main(String[] args) {
+        // setup
+        RectangularBoard board = new RectangularBoard(3, 3);
+        RectangularBoard copy = board.deepCopy();
+        Location[] locationsOrig = board.getLocations();
+        Location[] locationsCopy = copy.getLocations();
+        locationsOrig[0].setPeg(true);
+        locationsOrig[1].setPeg(true);
+        locationsCopy[0].setPeg(true);
+        locationsCopy[1].setPeg(true);
+
+        // invoke
+        Location from = locationsCopy[0];
+        Location to = locationsCopy[2];
+        try {
+            copy.MakeMove(new Move(from, to));
+        } catch (PegGameException e) {
+            e.printStackTrace();
+        }
+
+        // // analyze
+        // assertFalse(board.equals(copy));
     }
 }
