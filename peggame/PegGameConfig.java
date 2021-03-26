@@ -3,6 +3,7 @@ package peggame;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import backtracker.Configuration;
 import peggame.PegGame.GameState;
@@ -16,7 +17,12 @@ public class PegGameConfig implements Configuration{
 
     @Override
     public Collection<Configuration> getSuccessors() {
-        return null;
+        List<Configuration> successors = new ArrayList<>();
+        Set<Move> moves = (Set<Move>) game.getPossibleMoves();
+
+
+
+        return successors;
     }
 
     @Override
