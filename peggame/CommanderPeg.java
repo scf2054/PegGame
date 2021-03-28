@@ -52,26 +52,6 @@ public class CommanderPeg {
             }
 
             else if (commands[0].equals("hint")) {
-                // HashSet<Move> possible = (HashSet<Move>)game.getPossibleMoves();
-                // ArrayList<Move> moves = new ArrayList<>();
-                // for(Move possibility : possible) {
-                //     moves.add(possibility);
-                // }
-                // if (hintsUsed.size() == moves.size()) {
-                //     System.out.println("Used all of the hints");
-                //     continue;
-                // }
-                // Random random = new Random();
-                // boolean found = false;
-                // while (!found) {
-                //     int index = random.nextInt(moves.size());
-                //     Move move = moves.get(index);
-                //     if (!hintsUsed.contains(move)) {
-                //         hintsUsed.add(move);
-                //         System.out.println("hint: Move " + move);
-                //         found = true;
-                //     } 
-                // }
                 PegGameConfig solution = (PegGameConfig)PegGameConfig.getSolution(game);
                 if(solution == null) {
                     System.out.println("This game is unwinnable. Have a nice day.");
