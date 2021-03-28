@@ -16,7 +16,6 @@ public class PegGameConfig implements Configuration{
 
     @Override
     public Collection<Configuration> getSuccessors() {
-        int x = 5;
         List<Configuration> successors = new ArrayList<>();
         List<Move> moves = (ArrayList<Move>) game.getPossibleMoves();
         for (Move move : moves) {
