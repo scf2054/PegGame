@@ -1,6 +1,7 @@
 package peggame;
 
 import java.util.Collection;
+import java.util.Set;
 
 public interface PegGame{
 
@@ -15,6 +16,7 @@ public interface PegGame{
     GameState getGameState();
     void MakeMove(Move move) throws PegGameException;
     Location[] getLocations();
+    Set<Move> getMovesMade();
 
     default PegGame deepCopy() {
         throw new UnsupportedOperationException();

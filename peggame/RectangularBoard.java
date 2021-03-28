@@ -236,8 +236,7 @@ public class RectangularBoard implements PegGame {
         RectangularBoard copy = new RectangularBoard(this.rows, this.cols);
         Location[] newLocations = new Location[this.locations.length];
         for(int i = 0; i < newLocations.length; i++) {
-            Location loc = new Location(this.locations[i].getRow(), this.locations[i].getCol());
-            newLocations[i] = loc;
+            newLocations[i] = this.locations[i];
         }
 
         copy.setLocations(newLocations);
@@ -245,6 +244,7 @@ public class RectangularBoard implements PegGame {
 
         return copy;
     }
+    public Set<Move> getMovesMade() { return movesMade; }
 
     public int getRows() {
         return this.rows;

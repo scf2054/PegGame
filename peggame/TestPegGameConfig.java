@@ -1,9 +1,18 @@
 package peggame;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.lang.module.Configuration;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import backtracker.*;
 
 import org.junit.Test;
 import org.junit.platform.commons.annotation.Testable;
@@ -125,9 +134,42 @@ public class TestPegGameConfig {
         } catch (PegGameException e){
             e.printStackTrace();
         }
-
         PegGameConfig config = new PegGameConfig(game);
-
         assertFalse(config.isValid());
     }
+
+    @Test
+    public void testGetSuccessors(){
+        PegGame game = null;
+        PegGame expected = null;
+        try{
+            game = ReadFile.PegFile("C:/Users/earth/Documents/SoftDev2/Project01/project-1-03-01/data/One_move.txt");
+            expected = ReadFile.PegFile("C:/Users/earth/Documents/SoftDev2/Project01/project-1-03-01/data/the_move.txt");
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+
+        PegGameConfig config = new PegGameConfig(game);
+        PegGameConfig exe = new PegGameConfig(expected);
+        List<backtracker.Configuration> successors = (ArrayList<backtracker.Configuration>) config.getSuccessors();
+        
+        assertEquals(exe, successors.get(0));
+    }
+
+    public static void main(String[] args) {
+        PegGame game = null;
+        PegGame expected = null;
+        try{
+            game = ReadFile.PegFile("C:/Users/earth/Documents/SoftDev2/Project01/project-1-03-01/data/One_move.txt");
+            expected = ReadFile.PegFile("C:/Users/earth/Documents/SoftDev2/Project01/project-1-03-01/data/the_move.txt");
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        PegGameConfig config = new PegGameConfig(game);
+        List<backtracker.Configuration> successors = (ArrayList<backtracker.Configuration>) config.getSuccessors();
+
+        System.out.println(game);
+        System.out.println(successors.get(0).toString());
+    }
 }
+
