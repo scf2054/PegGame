@@ -12,9 +12,21 @@ import peggame.PegGame.GameState;
 
 public class PegGameConfig implements Configuration{
     private final PegGame game;
+    private final Move moveMade;
+    private ArrayList<Move> movesMade;
 
     public PegGameConfig(PegGame game){
+        this(game, null);
+    }
+
+    public PegGameConfig(PegGame game, Move moveMade) {
+        this(game, moveMade, new ArrayList<Move>());
+    }
+
+    public PegGameConfig(PegGame game, Move moveMade, ArrayList<Move> movesMade) {
         this.game = game;
+        this.moveMade = moveMade;
+        this.movesMade = movesMade;
     }
 
     /**
@@ -27,8 +39,19 @@ public class PegGameConfig implements Configuration{
         List<Configuration> successors = new ArrayList<>();
         Set<Move> moves = (HashSet<Move>) game.getPossibleMoves();
         PegGameConfig successor = null;
+        Move newMove;
+        Location from;
+        Location to;
         for (Move move : moves) {
-            successor = new PegGameConfig(game.deepCopy());
+            ArrayList<Move> newMovesMade = new ArrayList<>();
+            for(Move move2 : this.movesMade) {
+                newMovesMade.add(move2);
+            }
+            from = move.getFrom();
+            to = move.getTo();
+            newMove = new Move(from, to);
+            newMovesMade.add(newMove);
+            successor = new PegGameConfig(game.deepCopy(), move, newMovesMade);
             try {
                 successor.getGame().MakeMove(move);
             }
@@ -57,23 +80,16 @@ public class PegGameConfig implements Configuration{
     }
     
     public PegGame getGame(){ return game; }
+    public Move getMoveMade(){ return this.moveMade; }
+    public ArrayList<Move> getMovesMade(){ return this.movesMade; }
 
     @Override
-    public String toString(){
-        String string = game.toString() + "\n\n[";
-        int i = 0;
-        for(Move move : game.getMovesMade()){
-            if(i == game.getMovesMade().size() - 1) {
-                string += move + "]";
-            } else {
-                string += move + ", ";
-            }
-        }
-        return string;
+    public String toString() {
+        return "Move " + this.moveMade + "\n" + this.game;
     }
 
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         if(o instanceof PegGameConfig){
             PegGameConfig other = (PegGameConfig) o;
             return this.getGame().equals(other.getGame());

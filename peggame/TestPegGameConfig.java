@@ -172,7 +172,7 @@ public class TestPegGameConfig {
         } catch (PegGameException e) {
             e.printStackTrace();
         }
-        String expected = "--o\n\n[from (0, 0) to (0, 2)]";
+        String expected = "Move null\n--o";
         
         // invoke
         String actual = config.toString();

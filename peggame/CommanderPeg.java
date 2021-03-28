@@ -2,7 +2,6 @@ package peggame;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -48,29 +47,37 @@ public class CommanderPeg {
                 " help - displays this message\n" +
                 " move r1 c1 r2 c2 - attempts to move a peg from r1 c1 to r2 c2 on the board.\n" +
                 " hint - displays an available move.\n" +
+                " solve - finishes the game if possible.\n" +
                 " quit - quits the game");
             }
 
             else if (commands[0].equals("hint")) {
-                HashSet<Move> possible = (HashSet<Move>)game.getPossibleMoves();
-                ArrayList<Move> moves = new ArrayList<>();
-                for(Move possibility : possible) {
-                    moves.add(possibility);
-                }
-                if (hintsUsed.size() == moves.size()) {
-                    System.out.println("Used all of the hints");
-                    continue;
-                }
-                Random random = new Random();
-                boolean found = false;
-                while (!found) {
-                    int index = random.nextInt(moves.size());
-                    Move move = moves.get(index);
-                    if (!hintsUsed.contains(move)) {
-                        hintsUsed.add(move);
-                        System.out.println("hint: Move " + move);
-                        found = true;
-                    } 
+                // HashSet<Move> possible = (HashSet<Move>)game.getPossibleMoves();
+                // ArrayList<Move> moves = new ArrayList<>();
+                // for(Move possibility : possible) {
+                //     moves.add(possibility);
+                // }
+                // if (hintsUsed.size() == moves.size()) {
+                //     System.out.println("Used all of the hints");
+                //     continue;
+                // }
+                // Random random = new Random();
+                // boolean found = false;
+                // while (!found) {
+                //     int index = random.nextInt(moves.size());
+                //     Move move = moves.get(index);
+                //     if (!hintsUsed.contains(move)) {
+                //         hintsUsed.add(move);
+                //         System.out.println("hint: Move " + move);
+                //         found = true;
+                //     } 
+                // }
+                PegGameConfig solution = (PegGameConfig)PegGameConfig.getSolution(game);
+                if(solution == null) {
+                    System.out.println("This game is unwinnable. Have a nice day.");
+                } else {
+                    ArrayList<Move> movesMade = solution.getMovesMade();
+                    System.out.println(movesMade.get(0));
                 }
             }
 
