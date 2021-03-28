@@ -61,4 +61,73 @@ public class TestPegGameConfig {
         // analyze
         assertFalse(config.isGoal());
     }
+
+    @Test
+    public void testIs_validTrue(){
+        // setup
+        PegGame game = null;
+        try {
+            game = ReadFile.PegFile("C:/Users/earth/Documents/SoftDev2/Project01/project-1-03-01/data/5_5.txt");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Location from = null;
+        Location to = null;
+        Location[] locations = game.getLocations();
+        for (Location location : locations) {
+            if (location.getRow() == 2 && location.getCol() == 0) {
+                from = location;
+            }
+
+            else if (location.getRow() == 2 && location.getCol() == 2) {
+                to = location;
+            }
+        }
+
+        try{
+            game.MakeMove(new Move(from, to));
+        } catch (PegGameException e){
+            e.printStackTrace();
+        }
+        PegGameConfig config = new PegGameConfig(game);
+        assertTrue(config.isValid());
+    }
+
+    @Test
+
+    public void testIs_validFalse(){
+        // setup
+        PegGame game = null;
+        try {
+            game = ReadFile.PegFile("C:/Users/earth/Documents/SoftDev2/Project01/project-1-03-01/data/stalePeg.txt");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Location from = null;
+        Location to = null;
+        Location[] locations = game.getLocations();
+        for (Location location : locations) {
+            if (location.getRow() == 0 && location.getCol() == 1) {
+                from = location;
+            }
+
+            else if (location.getRow() == 0 && location.getCol() == 3) {
+                to = location;
+            }
+        }
+
+        try{
+            game.MakeMove(new Move(from, to));
+        } catch (PegGameException e){
+            e.printStackTrace();
+        }
+
+        PegGameConfig config = new PegGameConfig(game);
+
+        assertFalse(config.isValid());
+    }
 }
