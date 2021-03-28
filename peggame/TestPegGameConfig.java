@@ -15,7 +15,7 @@ import org.junit.platform.commons.annotation.Testable;
 public class TestPegGameConfig {
     
     @Test
-    public void is_goalTrue() {
+    public void testIsGoalTrue() {
         // setup
         PegGame game = null;
         try {
@@ -50,7 +50,7 @@ public class TestPegGameConfig {
     }
 
     @Test
-    public void is_goalFalse() {
+    public void testIsGoalFalse() {
         // setup
         PegGame game = null;
         try {
@@ -66,7 +66,7 @@ public class TestPegGameConfig {
     }
 
     @Test
-    public void testIs_validTrue(){
+    public void testIsValidTrue(){
         // setup
         PegGame game = null;
         try {
@@ -100,7 +100,7 @@ public class TestPegGameConfig {
 
     @Test
 
-    public void testIs_validFalse(){
+    public void testIsValidFalse(){
         // setup
         PegGame game = null;
         try {
@@ -150,19 +150,32 @@ public class TestPegGameConfig {
         assertEquals(exe, successors.get(0));
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void testConfigPrint() {
+        // setup
         PegGame game = null;
-        PegGame expected = null;
         try{
             game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/One_move.txt");
-            expected = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/the_move.txt");
         } catch(IOException e){
             e.printStackTrace();
         }
 
         PegGameConfig config = new PegGameConfig(game);
-        PegGameConfig exe = new PegGameConfig(expected);
-        List<backtracker.Configuration> successors = (ArrayList<backtracker.Configuration>) config.getSuccessors();
+        Location[] locations = config.getGame().getLocations();
+        Location from = locations[0];
+        Location to = locations[2];
+        try {
+            config.getGame().MakeMove(new Move(from, to));
+        } catch (PegGameException e) {
+            e.printStackTrace();
+        }
+        String expected = "--o\n\n[from (0, 0) to (0, 2)]";
+        
+        // invoke
+        String actual = config.toString();
+
+        // analyze
+        assertEquals(expected, actual);
     }
 }
 

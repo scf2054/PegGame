@@ -48,9 +48,14 @@ public class PegGameConfig implements Configuration{
 
     @Override
     public String toString(){
-        String string = game.toString() + " ";
+        String string = game.toString() + "\n\n[";
+        int i = 0;
         for(Move move : game.getMovesMade()){
-            string += move + ", ";
+            if(i == game.getMovesMade().size() - 1) {
+                string += move + "]";
+            } else {
+                string += move + ", ";
+            }
         }
         return string;
     }
