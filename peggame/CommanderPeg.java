@@ -61,6 +61,26 @@ public class CommanderPeg {
                 }
             }
 
+            else if (commands[0].equals("solve")) {
+                PegGameConfig solution = (PegGameConfig) PegGameConfig.getSolution(game);
+                if(solution == null){
+                    System.out.println("This game is unwinnable. Have a nice day.");
+                } else {
+                    ArrayList<Move> movesMade = solution.getMovesMade();
+                    for(Move move : movesMade){
+                        try{
+                            game.MakeMove(move);
+                            System.out.println(move);
+                            System.out.println(game+"\n");
+                        } catch (PegGameException e){
+                            System.out.println("This game is unwinable, you turnip.");
+                        }
+                    }
+                    System.out.println("You Won!\nGood Bye!");
+                    break;
+                }
+            }
+
             else if (commands[0].equals("move")) {
                 int startRow, startCol, endRow, endCol;
                 try {
