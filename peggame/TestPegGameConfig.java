@@ -1,5 +1,6 @@
 package peggame;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
@@ -43,5 +44,21 @@ public class TestPegGameConfig {
 
         // analyze
         assertTrue(config.isGoal());
+    }
+
+    @Test
+    public void is_goalFalse() {
+        // setup
+        PegGame game = null;
+        try {
+            game = ReadFile.PegFile("C:/Users/earth/Documents/SoftDev2/Project01/project-1-03-01/data/10_10.txt");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        PegGameConfig config = new PegGameConfig(game);
+
+        // analyze
+        assertFalse(config.isGoal());
     }
 }
