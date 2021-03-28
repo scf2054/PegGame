@@ -57,7 +57,7 @@ public class CommanderPeg {
                     System.out.println("This game is unwinnable. Have a nice day.");
                 } else {
                     ArrayList<Move> movesMade = solution.getMovesMade();
-                    System.out.println(movesMade.get(0));
+                    System.out.println("Move " + movesMade.get(0));
                 }
             }
 
