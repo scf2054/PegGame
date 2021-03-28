@@ -48,7 +48,7 @@ public class RectangularBoard implements PegGame {
      */
     @Override
     public Collection<Move> getPossibleMoves() {
-        Set<Move> possible = new HashSet<>();
+        Collection<Move> possible = new HashSet<>();
         for(Location location : this.locations){
             if(location.hasPeg()){
                 int up2 = location.getRow()+2;

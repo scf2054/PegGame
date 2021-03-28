@@ -18,7 +18,19 @@ public class PegGameConfig implements Configuration{
     @Override
     public Collection<Configuration> getSuccessors() {
         List<Configuration> successors = new ArrayList<>();
-        Set<Move> moves = (Set<Move>) game.getPossibleMoves();
+        List<Move> moves = (ArrayList<Move>) game.getPossibleMoves();
+        for (Move move : moves) {
+            PegGame successor = game.deepCopy();
+            try {
+                successor.MakeMove(move);
+            }
+
+            catch (PegGameException e) {
+                e.printStackTrace();
+            }
+            successors.add((Configuration)successor);
+        }
+        return successors;
 
 
 
