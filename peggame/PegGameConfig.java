@@ -3,7 +3,6 @@ package peggame;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import backtracker.Configuration;
 import peggame.PegGame.GameState;
@@ -30,10 +29,6 @@ public class PegGameConfig implements Configuration{
             }
             successors.add((Configuration)successor);
         }
-        return successors;
-
-
-
         return successors;
     }
 
