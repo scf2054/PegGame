@@ -235,8 +235,17 @@ public class RectangularBoard implements PegGame {
     public RectangularBoard deepCopy() {
         RectangularBoard copy = new RectangularBoard(this.rows, this.cols);
         Location[] newLocations = new Location[this.locations.length];
+        int row;
+        int col;
+        Location location;
         for(int i = 0; i < newLocations.length; i++) {
-            newLocations[i] = this.locations[i];
+            row = this.locations[i].getRow();
+            col = this.locations[i].getCol();
+            location = new Location(row, col);
+            if(this.locations[i].hasPeg()) {
+                location.setPeg(true);
+            }
+            newLocations[i] = location;
         }
 
         copy.setLocations(newLocations);

@@ -16,7 +16,7 @@ public class Move {
     public boolean equals(Object o){
         if(o instanceof Move){
             Move other = (Move) o;
-            return this.from == other.from && this.to == other.to;
+            return this.from.equals(other.from) && this.to.equals(other.to);
         }
         return false;
     }

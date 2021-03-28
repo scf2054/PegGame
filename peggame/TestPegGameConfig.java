@@ -5,14 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
-import java.lang.module.Configuration;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import backtracker.*;
 
 import org.junit.Test;
 import org.junit.platform.commons.annotation.Testable;
@@ -25,7 +19,7 @@ public class TestPegGameConfig {
         // setup
         PegGame game = null;
         try {
-            game = ReadFile.PegFile("C:/Users/borna/VS Code/SoftDevII/project/project-1-03-01/data/10_10.txt");
+            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/10_10.txt");
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -60,7 +54,7 @@ public class TestPegGameConfig {
         // setup
         PegGame game = null;
         try {
-            game = ReadFile.PegFile("C:/Users/earth/Documents/SoftDev2/Project01/project-1-03-01/data/10_10.txt");
+            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/10_10.txt");
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -76,7 +70,7 @@ public class TestPegGameConfig {
         // setup
         PegGame game = null;
         try {
-            game = ReadFile.PegFile("C:/Users/earth/Documents/SoftDev2/Project01/project-1-03-01/data/5_5.txt");
+            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/5_5.txt");
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -110,7 +104,7 @@ public class TestPegGameConfig {
         // setup
         PegGame game = null;
         try {
-            game = ReadFile.PegFile("C:/Users/earth/Documents/SoftDev2/Project01/project-1-03-01/data/stalePeg.txt");
+            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/stalePeg.txt");
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -143,8 +137,8 @@ public class TestPegGameConfig {
         PegGame game = null;
         PegGame expected = null;
         try{
-            game = ReadFile.PegFile("C:/Users/earth/Documents/SoftDev2/Project01/project-1-03-01/data/One_move.txt");
-            expected = ReadFile.PegFile("C:/Users/earth/Documents/SoftDev2/Project01/project-1-03-01/data/the_move.txt");
+            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/One_move.txt");
+            expected = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/the_move.txt");
         } catch(IOException e){
             e.printStackTrace();
         }
@@ -160,16 +154,15 @@ public class TestPegGameConfig {
         PegGame game = null;
         PegGame expected = null;
         try{
-            game = ReadFile.PegFile("C:/Users/earth/Documents/SoftDev2/Project01/project-1-03-01/data/One_move.txt");
-            expected = ReadFile.PegFile("C:/Users/earth/Documents/SoftDev2/Project01/project-1-03-01/data/the_move.txt");
+            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/One_move.txt");
+            expected = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/the_move.txt");
         } catch(IOException e){
             e.printStackTrace();
         }
-        PegGameConfig config = new PegGameConfig(game);
-        List<backtracker.Configuration> successors = (ArrayList<backtracker.Configuration>) config.getSuccessors();
 
-        System.out.println(game);
-        System.out.println(successors.get(0).toString());
+        PegGameConfig config = new PegGameConfig(game);
+        PegGameConfig exe = new PegGameConfig(expected);
+        List<backtracker.Configuration> successors = (ArrayList<backtracker.Configuration>) config.getSuccessors();
     }
 }
 
