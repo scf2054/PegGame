@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import backtracker.Backtracker;
 import backtracker.Configuration;
 import peggame.PegGame.GameState;
 
@@ -16,6 +17,11 @@ public class PegGameConfig implements Configuration{
         this.game = game;
     }
 
+    /**
+     * Returns a list of all the valid configurations of a board
+     * 
+     * @return Collection<Configuration> a list of all the possible configurations
+     */
     @Override
     public Collection<Configuration> getSuccessors() {
         List<Configuration> successors = new ArrayList<>();
@@ -34,11 +40,17 @@ public class PegGameConfig implements Configuration{
         return successors;
     }
 
+    /**
+     * @return boolean if the game is not in a stalemate
+     */
     @Override
     public boolean isValid() {
         return game.getGameState() != GameState.STALEMATE;
     }   
 
+    /**
+     * @return boolean if the game state has been won
+     */
     @Override
     public boolean isGoal() {
         return game.getGameState() == GameState.WON;
@@ -67,5 +79,24 @@ public class PegGameConfig implements Configuration{
             return this.getGame().equals(other.getGame());
         }
         return false;
+    }
+
+    /**
+     * Through user input, this returns the correct solution to the game
+     * the user wants to solve.
+     * Returns nothing if there is no solution.
+     * 
+     * @param game that the user wants to find a solution to
+     * 
+     * @return the successful configuration, null if failed
+     */
+    public static Configuration getSolution(PegGame game) {
+        Backtracker backtracker = new Backtracker(false);
+        PegGameConfig config = new PegGameConfig(game);
+        Configuration solution = backtracker.solve(config);
+        if(solution == null) {
+            return null;
+        }
+        return solution;
     }
 }

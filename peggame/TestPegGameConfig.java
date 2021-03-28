@@ -11,6 +11,9 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.platform.commons.annotation.Testable;
 
+import backtracker.Configuration;
+import peggame.PegGameConfig;
+
 @Testable
 public class TestPegGameConfig {
     
@@ -173,6 +176,44 @@ public class TestPegGameConfig {
         
         // invoke
         String actual = config.toString();
+
+        // analyze
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGetSolution() {
+        // setup
+        PegGame game = null;
+        PegGame ex = null;
+        try{
+            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/One_move.txt");
+            ex = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/the_move.txt");
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        PegGameConfig expected = new PegGameConfig(ex);
+
+        // invoke
+        Configuration actual = PegGameConfig.getSolution(game);
+
+        // analyze
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGetSolutionNull() {
+        // setup
+        PegGame game = null;
+        try{
+            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/the_move.txt");
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        PegGameConfig expected = null;
+
+        // invoke
+        Configuration actual = PegGameConfig.getSolution(game);
 
         // analyze
         assertEquals(expected, actual);
