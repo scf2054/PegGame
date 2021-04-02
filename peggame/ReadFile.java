@@ -17,7 +17,7 @@ public class ReadFile {
      * 
      * @throws IOException for the reader variables
      */
-    public static PegGame PegFile(String filename) throws IOException{
+    public static PegGame RectangleFile(String filename) throws IOException{
         FileReader filereader = new FileReader(filename);
         BufferedReader reader = new BufferedReader(filereader);
 
@@ -52,11 +52,28 @@ public class ReadFile {
         return peg;
     }
 
+    public static PegGame TriangleFile(String filename) throws IOException {
+        FileReader filereader = new FileReader(filename);
+        BufferedReader reader = new BufferedReader(filereader);
+
+        int size = Integer.parseInt(reader.readLine());
+        int index = 0;
+
+        String line = reader.readLine();
+        String[] split = line.split("");
+
+        TriangularBoard board = new TriangularBoard(size);
+        Location[] locations = board.getLocations();
+
+
+        return null;
+    }
+
     public static void main(String[] args) {
         String filename = "data/10_10.txt";
 
         try {
-            PegGame peg = PegFile(filename);
+            PegGame peg = RectangleFile(filename);
             System.out.println(peg);
 
         } catch (IOException e){

@@ -47,13 +47,13 @@ public class TriangularBoard implements PegGame{
 
     @Override
     public Location[] getLocations() {
-        return locations;
+        return this.locations;
     }
 
     @Override
     public Set<Move> getMovesMade() {
-        return movesMade;
-    }
+        return this.movesMade;
+    }    
 
     public void setLocations(Location[] newLocations) {
         this.locations = newLocations;
@@ -61,5 +61,5 @@ public class TriangularBoard implements PegGame{
 
     public void setMovesMade(Set<Move> newMoves) {
         this.movesMade = newMoves;
-    }    
+    }
 }

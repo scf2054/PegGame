@@ -10,7 +10,7 @@ public class Project1Main {
         String filename = scanner.nextLine();
         PegGame game = null;
         try{
-            game = ReadFile.PegFile(filename);
+            game = ReadFile.RectangleFile(filename);
             CommanderPeg.playPegGame(game);
         } catch (IOException e){
             System.out.println("File not found");

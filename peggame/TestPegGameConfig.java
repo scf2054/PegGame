@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.platform.commons.annotation.Testable;
+import org.w3c.dom.css.Rect;
 
 import backtracker.Configuration;
 import peggame.PegGameConfig;
@@ -20,9 +21,9 @@ public class TestPegGameConfig {
     @Test
     public void testIsGoalTrue() {
         // setup
-        PegGame game = null;
+        RectangularBoard game = null;
         try {
-            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/10_10.txt");
+            game = (RectangularBoard) ReadFile.RectangleFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/10_10.txt");
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -57,7 +58,7 @@ public class TestPegGameConfig {
         // setup
         PegGame game = null;
         try {
-            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/10_10.txt");
+            game = ReadFile.RectangleFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/10_10.txt");
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -71,9 +72,9 @@ public class TestPegGameConfig {
     @Test
     public void testIsValidTrue(){
         // setup
-        PegGame game = null;
+        RectangularBoard game = null;
         try {
-            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/5_5.txt");
+            game = (RectangularBoard) ReadFile.RectangleFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/5_5.txt");
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -105,9 +106,9 @@ public class TestPegGameConfig {
 
     public void testIsValidFalse(){
         // setup
-        PegGame game = null;
+        RectangularBoard game = null;
         try {
-            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/stalePeg.txt");
+            game = (RectangularBoard) ReadFile.RectangleFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/stalePeg.txt");
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -140,8 +141,8 @@ public class TestPegGameConfig {
         PegGame game = null;
         PegGame expected = null;
         try{
-            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/One_move.txt");
-            expected = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/the_move.txt");
+            game = ReadFile.RectangleFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/One_move.txt");
+            expected = ReadFile.RectangleFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/the_move.txt");
         } catch(IOException e){
             e.printStackTrace();
         }
@@ -158,13 +159,14 @@ public class TestPegGameConfig {
         // setup
         PegGame game = null;
         try{
-            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/One_move.txt");
+            game = ReadFile.RectangleFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/One_move.txt");
         } catch(IOException e){
             e.printStackTrace();
         }
 
         PegGameConfig config = new PegGameConfig(game);
-        Location[] locations = config.getGame().getLocations();
+        RectangularBoard board = (RectangularBoard) config.getGame();
+        Location[] locations = board.getLocations();
         Location from = locations[0];
         Location to = locations[2];
         try {
@@ -187,8 +189,8 @@ public class TestPegGameConfig {
         PegGame game = null;
         PegGame ex = null;
         try{
-            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/One_move.txt");
-            ex = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/the_move.txt");
+            game = ReadFile.RectangleFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/One_move.txt");
+            ex = ReadFile.RectangleFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/the_move.txt");
         } catch(IOException e){
             e.printStackTrace();
         }
@@ -206,7 +208,7 @@ public class TestPegGameConfig {
         // setup
         PegGame game = null;
         try{
-            game = ReadFile.PegFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/the_move.txt");
+            game = ReadFile.RectangleFile("/Users/sam/SoftDevII/GroupProject/project-1-03-01/data/the_move.txt");
         } catch(IOException e){
             e.printStackTrace();
         }
