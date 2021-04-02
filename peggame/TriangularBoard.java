@@ -21,7 +21,19 @@ public class TriangularBoard implements PegGame{
         for(int i = 1; i<size; i++){
             total += i;
         }
+
         Location[] locations = new Location[total];
+        int cols = 0;
+        int index = 0;
+        for(int i = 0; i<size; i++){
+            cols++;
+            for(int j = 0; j<cols; j++){
+                Location location = new Location(i, j);
+                locations[index] = location;
+                index++;
+            }
+        }
+        return locations;
     }
 
     @Override
@@ -135,6 +147,11 @@ public class TriangularBoard implements PegGame{
     }
 
     public Location getLocation(int row, int col) {
+        for(Location location : this.locations){
+            if(location.getRow() == row && location.getCol() == col){
+                return location;
+            }
+        }
         return null;
     }
 
