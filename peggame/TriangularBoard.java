@@ -21,8 +21,33 @@ public class TriangularBoard implements PegGame{
     }
     @Override
     public Collection<Move> getPossibleMoves() {
-        // TODO Auto-generated method stub
-        return null;
+        Collection<Move> possible = new HashSet<>();
+        for(Location location : this.locations){
+            if(location.hasPeg()){
+                int up2 = location.getRow()+2;
+                int up1 = location.getRow()+1;
+                int down2 = location.getRow()-2;
+                int down1 = location.getRow()-1;
+                int right2 = location.getCol()+2;
+                int right1 = location.getCol()+1;
+                int left2 = location.getCol()-2;
+                int left1 = location.getCol()-1;
+
+                int[] movesV = {location.getRow(), location.getRow(), location.getRow(), location.getRow(),up2,up1,down2,down1,down2,down1,up2,up1};
+                int[] movesH = {right2, right1, left2, left1,right2,right1,right2,right1,left2,left1,left2,left1};
+
+                for(int i = 0; i < movesV.length; i+=2) {
+                    Location moveTo = getLocation(movesV[i], movesH[i]);
+                    Location target = getLocation(movesV[i+1], movesH[i+1]);
+                    if(moveTo != null && target.hasPeg() && !moveTo.hasPeg()){
+                        Move moveV = new Move(location, moveTo);
+                        possible.add(moveV);
+                    }
+                    
+                }
+            }
+        }
+        return possible;
     }
 
     @Override
@@ -37,7 +62,7 @@ public class TriangularBoard implements PegGame{
         
     }
 
-    public Location getLocation() {
+    public Location getLocation(int row, int col) {
         return null;
     }
 
