@@ -57,16 +57,28 @@ public class ReadFile {
         BufferedReader reader = new BufferedReader(filereader);
 
         int size = Integer.parseInt(reader.readLine());
-        int index = 0;
+        int index = 1;
 
         String line = reader.readLine();
-        String[] split = line.split("");
 
         TriangularBoard board = new TriangularBoard(size);
         Location[] locations = board.getLocations();
+        if(line.equals("o")) {
+            locations[0].setPeg(true);
+        }
 
-
-        return null;
+        for(line = reader.readLine(); line != null; line = reader.readLine()){
+            String[] split = line.split("");
+            for(String symbol : split){
+                if(symbol.equals("o")){
+                    locations[index].setPeg(true);
+                }
+                index++;
+            }
+        }
+        filereader.close();
+        reader.close();
+        return board;
     }
 
     public static void main(String[] args) {
@@ -79,5 +91,16 @@ public class ReadFile {
         } catch (IOException e){
             System.out.println("File doesn't exist, you turnip.");
         }
+
+        filename = "data_tri/3.txt";
+
+        try {
+            PegGame peg = TriangleFile(filename);
+            // System.out.println(peg);
+
+        } catch (IOException e){
+            System.out.println("File doesn't exist, you turnip.");
+        }
+
     }
 }
