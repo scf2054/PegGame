@@ -176,4 +176,33 @@ public class TriangularBoard implements PegGame{
     public void setMovesMade(Set<Move> newMoves) {
         this.movesMade = newMoves;
     }
+
+    @Override
+    public String toString() {
+        // initialize the board string
+        String board = "";
+        // number of spaces is equal to size - 1
+        int numOfSpaces = this.size - 1;
+        // for each location in locations
+        for(int i = 0; i < this.size; i++) {
+            // while the number of columns is less than the number of spaces
+            for(int j = 0; j < numOfSpaces; j++) {
+                // increment that many spaces
+                board += " ";
+            }
+            // if location has a peg, add a "o "
+            if(this.locations[i].hasPeg()) {
+                board += "o ";
+            } 
+            // otherwise add a "- "
+            else {
+                board += "- ";
+            }
+            // add a \n
+            board += "\n";
+            // decrement the number of spaces
+            numOfSpaces -= 1;
+        }
+        return board;
+    }
 }
