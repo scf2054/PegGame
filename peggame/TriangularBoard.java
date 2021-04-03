@@ -41,6 +41,12 @@ public class TriangularBoard implements PegGame{
         return locations;
     }
 
+    /**
+     * Returns a collection of all the possible moves that can be made
+     * from the current board's layout.
+     * 
+     * @return Collection<Move> a set of moves that can be made by the player.
+     */
     @Override
     public Collection<Move> getPossibleMoves() {
         Collection<Move> possible = new HashSet<>();
@@ -62,8 +68,8 @@ public class TriangularBoard implements PegGame{
                     Location moveTo = getLocation(movesV[i], movesH[i]);
                     Location target = getLocation(movesV[i+1], movesH[i+1]);
                     if(moveTo != null && target.hasPeg() && !moveTo.hasPeg()){
-                        Move moveV = new Move(location, moveTo);
-                        possible.add(moveV);
+                        Move move = new Move(location, moveTo);
+                        possible.add(move);
                     }
                     
                 }
@@ -223,10 +229,8 @@ public class TriangularBoard implements PegGame{
         PegGame board = new TriangularBoard(3);
         Location[] locations = board.getLocations();
         locations[0].setPeg(true);
+        locations[2].setPeg(true);
         locations[4].setPeg(true);
-        String expected = "  o \n - - \n- o - \n";
-        
-        // invoke
-        String actual = board.toString();
+        board.getPossibleMoves();
     }
 }
