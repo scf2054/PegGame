@@ -174,4 +174,44 @@ public class TestTriangularBoard {
             assertFalse(true);
         }
     }
+
+    @Test
+    public void testDeepCopy() {
+        // setup
+        TriangularBoard expected = new TriangularBoard(3);
+
+        // inovke
+        TriangularBoard actual = expected.deepCopy();
+
+        // analyze
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testDeepCopyMove() {
+        // setup
+        TriangularBoard board = new TriangularBoard(3);
+        TriangularBoard copy = board.deepCopy();
+        Location[] locationsOrig = board.getLocations();
+        Location[] locationsCopy = copy.getLocations();
+        locationsOrig[0].setPeg(true);
+        locationsOrig[2].setPeg(true);
+        locationsCopy[0].setPeg(true);
+        locationsCopy[2].setPeg(true);
+
+        // invoke
+        Location from = locationsCopy[0];
+        Location to = locationsCopy[5];
+
+        try {
+            copy.MakeMove(new Move(from, to));
+        }
+        catch (PegGameException e) {
+            e.printStackTrace();
+        }
+
+        // analyze
+        assertFalse(board.equals(copy));
+    }
 }

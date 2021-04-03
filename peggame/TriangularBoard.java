@@ -220,6 +220,38 @@ public class TriangularBoard implements PegGame{
     }
 
     @Override
+    public TriangularBoard deepCopy() {
+        TriangularBoard copy = new TriangularBoard(this.size);
+        Location[] newLocations = new Location[this.locations.length];
+        int row;
+        int col;
+        Location location;
+        for(int i = 0; i < newLocations.length; i++) {
+            row = this.locations[i].getRow();
+            col = this.locations[i].getCol();
+            location = new Location(row, col);
+            if(this.locations[i].hasPeg()) {
+                location.setPeg(true);
+            }
+            newLocations[i] = location;
+        }
+
+        copy.setLocations(newLocations);
+        copy.setMovesMade(this.movesMade);
+
+        return copy;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof TriangularBoard) {
+            TriangularBoard otherTriange = (TriangularBoard)other;
+            return this.toString().equals(otherTriange.toString());
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         // initialize the board string
         String board = "";
