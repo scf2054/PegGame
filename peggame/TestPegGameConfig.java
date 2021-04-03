@@ -10,10 +10,8 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.platform.commons.annotation.Testable;
-import org.w3c.dom.css.Rect;
 
 import backtracker.Configuration;
-import peggame.PegGameConfig;
 
 @Testable
 public class TestPegGameConfig {

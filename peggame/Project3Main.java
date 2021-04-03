@@ -1,7 +1,5 @@
 package peggame;
 
-import static org.junit.jupiter.api.DynamicTest.stream;
-
 import java.io.IOException;
 import java.util.Scanner;
 
