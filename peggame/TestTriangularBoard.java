@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Test;
 import org.junit.platform.commons.annotation.Testable;
 
+import peggame.PegGame.GameState;
+
 @Testable
 public class TestTriangularBoard {
 
@@ -86,6 +88,90 @@ public class TestTriangularBoard {
             assertEquals(expected, actual);
         } catch (PegGameException e) {
             assertFalse(false);
+        }
+    }
+
+    @Test
+    public void testGameStateNotStarted() {
+        // setup
+        PegGame board = new TriangularBoard(3);
+        Location[] locations = board.getLocations();
+        locations[0].setPeg(true);
+        locations[1].setPeg(true);
+        locations[2].setPeg(true);
+        GameState expected = GameState.NOT_STARTED;
+
+        // invoke
+        GameState actual = board.getGameState();
+
+        // analyze
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGameStateInProgress() {
+        // setup
+        PegGame board = new TriangularBoard(3);
+        Location[] locations = board.getLocations();
+        locations[0].setPeg(true);
+        locations[2].setPeg(true);
+        locations[4].setPeg(true);
+        Location fromLocation = locations[0];
+        Location toLocation = locations[5];
+        Move move = new Move(fromLocation,toLocation);
+        GameState expected = GameState.IN_PROGRESS;
+
+        try {
+            board.MakeMove(move);
+
+            // invoke
+            GameState actual = board.getGameState();
+
+            // analyze
+            assertEquals(expected, actual);
+        } catch (PegGameException p){
+            assertFalse(true);
+        }
+    }
+
+    @Test
+    public void testGameStateWon(){
+        PegGame board = new TriangularBoard(3);
+        Location[] locations = board.getLocations();
+        locations[0].setPeg(true);
+        locations[2].setPeg(true);
+        Location fromLocation = locations[0];
+        Location toLocation = locations[5];
+        Move move = new Move(fromLocation,toLocation);
+        GameState expected = GameState.WON;
+
+        try{
+            board.MakeMove(move);
+            GameState actual = board.getGameState();
+            assertEquals(expected, actual);
+        } catch (PegGameException p){
+            assertFalse(true);
+        }
+    }
+
+    @Test
+    public void testGameStateStalemate(){
+        PegGame board = new TriangularBoard(3);
+        Location[] locations = board.getLocations();
+        locations[0].setPeg(true);
+        locations[2].setPeg(true);
+        locations[3].setPeg(true);
+        Location fromLocation = locations[0];
+        Location toLocation = locations[5];
+        Move move = new Move(fromLocation,toLocation);
+        GameState expected = GameState.STALEMATE;
+
+        try{
+            board.MakeMove(move);
+            GameState actual = board.getGameState();
+            assertEquals(expected, actual);
+        } catch (PegGameException p){
+            assertFalse(true);
         }
     }
 }
