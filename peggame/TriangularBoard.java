@@ -16,9 +16,14 @@ public class TriangularBoard implements PegGame{
         this.movesMade = new HashSet<>();
     }
 
+    /**
+     * Helper method that creates the array of locations on the board.
+     * Get the total amount of spaces on the board and set that to the size of the array.
+     * Add in the coordinates to a brand new location and add it to the array.
+     */
     private Location[] makeLocations() {
         int total = 0;
-        for(int i = 1; i<size; i++){
+        for(int i = 1; i<=size; i++){
             total += i;
         }
 
@@ -183,6 +188,8 @@ public class TriangularBoard implements PegGame{
         String board = "";
         // number of spaces is equal to size - 1
         int numOfSpaces = this.size - 1;
+        int cols = 1;
+        int index = 0;
         // for each location in locations
         for(int i = 0; i < this.size; i++) {
             // while the number of columns is less than the number of spaces
@@ -190,19 +197,36 @@ public class TriangularBoard implements PegGame{
                 // increment that many spaces
                 board += " ";
             }
-            // if location has a peg, add a "o "
-            if(this.locations[i].hasPeg()) {
-                board += "o ";
-            } 
-            // otherwise add a "- "
-            else {
-                board += "- ";
+            // add a new space on the board for wach column
+            for(int k = 0; k < cols; k++) {
+                // if location has a peg, add a "o "
+                if(this.locations[index].hasPeg()) {
+                    board += "o ";
+                } 
+                // otherwise add a "- "
+                else {
+                    board += "- ";
+                }
+                index++;
             }
             // add a \n
             board += "\n";
             // decrement the number of spaces
             numOfSpaces -= 1;
+            cols++;
         }
         return board;
+    }
+
+    public static void main(String[] args) {
+        // setup
+        PegGame board = new TriangularBoard(3);
+        Location[] locations = board.getLocations();
+        locations[0].setPeg(true);
+        locations[4].setPeg(true);
+        String expected = "  o \n - - \n- o - \n";
+        
+        // invoke
+        String actual = board.toString();
     }
 }
