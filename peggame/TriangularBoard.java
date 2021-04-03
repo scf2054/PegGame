@@ -78,6 +78,17 @@ public class TriangularBoard implements PegGame{
         return possible;
     }
 
+    /**
+     * Method that returns one of four different kind of states that
+     * the game can have. 
+     * 
+     * NOT_STARTED if the user hasn't made a move.
+     * IN_PROGRESS if the user made a move and there are stll possible moves.
+     * STALEMATE if the user made a mve but there are no more possible moves.
+     * WON if there is one peg left on the board.
+     * 
+     * @return GameState enum that has four possible game states
+     */
     @Override
     public GameState getGameState() {
         if(movesMade.size() == 0){
@@ -106,6 +117,14 @@ public class TriangularBoard implements PegGame{
         }
     }
 
+    /**
+     * Method that checks whether or not a move the user wants to 
+     * make is valid, throws a PegGameException if it is not valid.
+     * 
+     * @param move that the user wants to make
+     * 
+     * @throws PegGameException if the move is not possible
+     */
     @Override
     public void MakeMove(Move move) throws PegGameException {
         Set<Move> possibleMoves = (Set<Move>)getPossibleMoves();
@@ -157,7 +176,19 @@ public class TriangularBoard implements PegGame{
         }       
     }
 
-    public Location getLocation(int row, int col) {
+    /**
+     * Helper method that allows the board to get the location at 
+     * the row and column they want.
+     * 
+     * Manually tested.
+     * 
+     * @param row that the board wants
+     * 
+     * @param col that the board wants
+     * 
+     * @return Location from the locations field
+     */
+    private Location getLocation(int row, int col) {
         for(Location location : this.locations){
             if(location.getRow() == row && location.getCol() == col){
                 return location;
